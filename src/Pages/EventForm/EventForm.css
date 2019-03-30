@@ -1,0 +1,14 @@
+#event-form{
+    padding: 24px;
+}
+
+#form-holder{
+    margin-top: 102px;
+}
+
+@media (min-width: 992px) { 
+    #form-holder{
+        margin-left: 252px;
+        margin-right: 252px;
+    }
+ }

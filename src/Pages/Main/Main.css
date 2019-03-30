@@ -3,11 +3,21 @@
 }
 
 #event-list{
-    margin-top: 102px;
+    margin-top: 58px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+#add-new{
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#add-new:hover{
+    cursor: pointer;
 }
 
 @media (min-width: 992px) { 
