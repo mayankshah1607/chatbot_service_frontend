@@ -1,0 +1,13 @@
+#login{
+    padding: 26px;
+}
+#login-form{
+    margin-top: 14vh;
+}
+
+@media (min-width: 992px) { 
+    #login-form{
+        margin-left: 430px;
+        margin-right: 430px; 
+    }
+ }
