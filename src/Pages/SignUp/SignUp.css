@@ -1,0 +1,13 @@
+#signup{
+    padding: 26px;
+}
+#signup-form{
+    margin-top: 14vh;
+}
+
+@media (min-width: 992px) { 
+    #signup-form{
+        margin-left: 430px;
+        margin-right: 430px; 
+    }
+ }
