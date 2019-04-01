@@ -1,6 +1,24 @@
 import React, { Component } from 'react';
 import './EventForm.css';
-import {Form, Button} from 'react-bootstrap';
+import {Form, Button, InputGroup} from 'react-bootstrap';
+import tick from '../../tick.png';
+
+function copyStringToClipboard (str) {
+    // Create new element
+    var el = document.createElement('textarea');
+    // Set value (string to be copied)
+    el.value = str;
+    // Set non-editable to avoid focus and move outside of view
+    el.setAttribute('readonly', '');
+    el.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(el);
+    // Select text inside element
+    el.select();
+    // Copy text to clipboard
+    document.execCommand('copy');
+    // Remove temporary element
+    document.body.removeChild(el);
+ }
 
 export default class EventForm extends Component{
 
@@ -27,9 +45,16 @@ export default class EventForm extends Component{
             get_distance: 'Maybe check google maps?',
             get_location: 'Maybe check google maps?',
             show_contact_info: '',
-            about_chatbot: ''
+            about_chatbot: '',
+            success: false,
+            apiKey: ''
         }
     }
+
+    onCopy = () => {
+        copyStringToClipboard(this.state.apiKey);
+    }
+    
 
     onName = (event) => {
         this.setState({EventName: event.target.value})
@@ -108,16 +133,19 @@ export default class EventForm extends Component{
     }
 
     onSubmit = () => {
+        const obj = this.state;
+        delete obj.success;
+        delete obj.apiKey;
         fetch('http://localhost:5000/data/addevent',{
             method: 'post',
             headers: {'Content-type':'application/json'},
             credentials: 'include',
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(obj)
         })
         .then(response => response.json())
         .then(data => {
             if (data.Status) {
-                alert('Event has been added successfully')
+                this.setState({success: true, apiKey: data.data._id})
             }
 
             else {
@@ -132,111 +160,136 @@ export default class EventForm extends Component{
 
 
     render(){
-        return(
-            <div id='event-form'>
-                <h4 style={{'textAlign':'center'}}>Just answer the following questions</h4>
-                <h5 style={{'fontWeight':'100','textAlign':'center','color':'#686868'}}>Let the ChatBot handle the rest! :)</h5>
-
-                <div id='form-holder'>
-                    <Form>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Event Name</Form.Label>
-                        <Form.Control onChange={this.onName} type="text" placeholder="Your Answer" />
+        if (this.state.success) {
+            return(
+                <div id='api-success'>
+                    <img id='tick' src={tick}></img>
+                    <h3>Event has been added successfully</h3>
+                    <Form.Group id='api-field'>
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                        <InputGroup.Text id="inputGroupPrepend"><strong>API Key</strong></InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control contentEditable={false}
+                        type="text"
+                        placeholder="Your API Key"
+                        value={this.state.apiKey}
+                        />
+                    </InputGroup>
                     </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Organization Name</Form.Label>
-                        <Form.Control onChange={this.onOrg} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Event Description</Form.Label>
-                        <Form.Control onChange={this.onDesc} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What is the event fees?</Form.Label>
-                        <Form.Control onChange={this.onFees} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Is the event refundable?</Form.Label>
-                        <Form.Control onChange={this.onRefund} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What is the registration date?</Form.Label>
-                        <Form.Control onChange={this.onRegDate} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What are the payment methods available?</Form.Label>
-                        <Form.Control onChange={this.onPayment} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What are the prizes?</Form.Label>
-                        <Form.Control onChange={this.onPrize} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What are the available discounts?</Form.Label>
-                        <Form.Control onChange={this.onDisc} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>How should the chatbot greet?</Form.Label>
-                        <Form.Control onChange={this.onGreet} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What is the event schedule?</Form.Label>
-                        <Form.Control onChange={this.onSchedule} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What is the event date?</Form.Label>
-                        <Form.Control onChange={this.onEDate} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What is the event time?</Form.Label>
-                        <Form.Control onChange={this.onETime} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What is the available accommodation?</Form.Label>
-                        <Form.Control onChange={this.onAcco} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Who are the speakers?</Form.Label>
-                        <Form.Control onChange={this.onSpeak} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Any extra information regarding the speakers?</Form.Label>
-                        <Form.Control onChange={this.onSpeakE} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>What is the food arrangement?</Form.Label>
-                        <Form.Control onChange={this.onFood} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Mention any location related info here.</Form.Label>
-                        <Form.Control type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Contact information?</Form.Label>
-                        <Form.Control onChange={this.onContact} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>About the organization</Form.Label>
-                        <Form.Control onChange={this.onAbout} type="text" placeholder="Your Answer" />
-                    </Form.Group>
-                    <br/>
-                    <Button onClick={this.onSubmit} variant="primary">
-                        Submit
-                    </Button>
-                    </Form>
+                    <p id='copy' onClick={this.onCopy}>Copy to clipboard</p>
                 </div>
-            
-            
-            </div>
-        );
+            );
+        }
+
+        else {
+
+            return(
+                <div id='event-form'>
+                    <h4 style={{'textAlign':'center'}}>Just answer the following questions</h4>
+                    <h5 style={{'fontWeight':'100','textAlign':'center','color':'#686868'}}>Let the ChatBot handle the rest! :)</h5>
+    
+                    <div id='form-holder'>
+                        <Form>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Event Name</Form.Label>
+                            <Form.Control onChange={this.onName} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Organization Name</Form.Label>
+                            <Form.Control onChange={this.onOrg} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Event Description</Form.Label>
+                            <Form.Control onChange={this.onDesc} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What is the event fees?</Form.Label>
+                            <Form.Control onChange={this.onFees} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Is the event refundable?</Form.Label>
+                            <Form.Control onChange={this.onRefund} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What is the registration date?</Form.Label>
+                            <Form.Control onChange={this.onRegDate} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What are the payment methods available?</Form.Label>
+                            <Form.Control onChange={this.onPayment} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What are the prizes?</Form.Label>
+                            <Form.Control onChange={this.onPrize} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What are the available discounts?</Form.Label>
+                            <Form.Control onChange={this.onDisc} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>How should the chatbot greet?</Form.Label>
+                            <Form.Control onChange={this.onGreet} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What is the event schedule?</Form.Label>
+                            <Form.Control onChange={this.onSchedule} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What is the event date?</Form.Label>
+                            <Form.Control onChange={this.onEDate} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What is the event time?</Form.Label>
+                            <Form.Control onChange={this.onETime} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What is the available accommodation?</Form.Label>
+                            <Form.Control onChange={this.onAcco} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Who are the speakers?</Form.Label>
+                            <Form.Control onChange={this.onSpeak} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Any extra information regarding the speakers?</Form.Label>
+                            <Form.Control onChange={this.onSpeakE} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>What is the food arrangement?</Form.Label>
+                            <Form.Control onChange={this.onFood} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Mention any location related info here.</Form.Label>
+                            <Form.Control type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Contact information?</Form.Label>
+                            <Form.Control onChange={this.onContact} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+    
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>About the organization</Form.Label>
+                            <Form.Control onChange={this.onAbout} type="text" placeholder="Your Answer" />
+                        </Form.Group>
+                        <br/>
+                        <Button onClick={this.onSubmit} variant="primary">
+                            Submit
+                        </Button>
+                        </Form>
+                    </div>
+                
+                
+                </div>
+            );
+        }
     }
 }

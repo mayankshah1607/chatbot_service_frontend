@@ -2,13 +2,45 @@
     padding: 24px;
 }
 
+#tick{
+    width: 200px;
+    height: auto;
+}
+
 #form-holder{
     margin-top: 102px;
 }
 
+#api-success{
+    margin-top: 10vh;
+    text-align: center;
+    margin-left: 32px;
+    margin-right: 32px; 
+}
+
+#api-success h3{
+    margin-bottom: 5vh;
+}
+
+#copy{
+    font-weight: bolder;
+    color: #808080;
+    cursor: pointer;
+}
+
+
 @media (min-width: 992px) { 
+    #api-field{
+        margin-left: 186px;
+        margin-right: 186px;
+    }
     #form-holder{
         margin-left: 252px;
         margin-right: 252px;
+    }
+
+    #api-success{   
+        margin-left: 332px;
+        margin-right: 332px; 
     }
  }
