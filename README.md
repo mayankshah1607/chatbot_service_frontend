@@ -11,3 +11,10 @@ Run the following commands :
 ```2. Copy the displayed Container ID```
 
 ```3. docker run -it <container-ID>```
+
+### Development mode (npm)
+Run the following commands: 
+
+```1. npm install```
+
+```2. npm install run```
