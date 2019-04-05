@@ -6,17 +6,25 @@ export default class CardHolder extends Component{
     constructor(props){
         super(props);
     }
+
+    componentDidMount(){
+        console.log(this.props)
+    }
     
     render(){
         const {Events} = this.props;
+
+        const cards = Events.map((obj,i) => {
+            return(
+                <CardView id={obj._id} eventName={obj.EventName} orgName={obj.Organization} desc={obj.Desc}/>
+            );
+        })
         
-        if (Events.length === 0) {
+        if (Events.length !== 0) {
             
             return(
                 <div id='event-list'>
-                    <CardView/>
-                    <CardView/>
-                    <CardView/>
+                    {cards}
                 </div>
             );
         }

@@ -178,6 +178,7 @@ export default class EventForm extends Component{
                     </InputGroup>
                     </Form.Group>
                     <p id='copy' onClick={this.onCopy}>Copy to clipboard</p>
+                    <p className='back-home' onClick={() => {window.location.href ='/'}}>Back to home</p>
                 </div>
             );
         }
@@ -186,8 +187,10 @@ export default class EventForm extends Component{
 
             return(
                 <div id='event-form'>
-                    <h4 style={{'textAlign':'center'}}>Just answer the following questions</h4>
-                    <h5 style={{'fontWeight':'100','textAlign':'center','color':'#686868'}}>Let the ChatBot handle the rest! :)</h5>
+                    <h4 style={{'textAlign':'center'}}>Enter the following details</h4>
+                    <h6 style={{'fontWeight':'100','textAlign':'center','color':'#686868'}}>Let the ChatBot handle the rest! :)</h6>
+                    <br/><br/><br/>
+                    <h6 style={{'fontWeight':'100','textAlign':'center'}}>Note that your answers will be your chatbot's replies</h6>
     
                     <div id='form-holder'>
                         <Form>
@@ -205,58 +208,58 @@ export default class EventForm extends Component{
                             <Form.Control onChange={this.onDesc} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What is the event fees?</Form.Label>
+                            <Form.Label>Event fees</Form.Label>
                             <Form.Control onChange={this.onFees} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Is the event refundable?</Form.Label>
+                            <Form.Label>Refund policy</Form.Label>
                             <Form.Control onChange={this.onRefund} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What is the registration date?</Form.Label>
+                            <Form.Label>Registration Date</Form.Label>
                             <Form.Control onChange={this.onRegDate} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What are the payment methods available?</Form.Label>
+                            <Form.Label>Payment methods</Form.Label>
                             <Form.Control onChange={this.onPayment} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What are the prizes?</Form.Label>
+                            <Form.Label>Prizes</Form.Label>
                             <Form.Control onChange={this.onPrize} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What are the available discounts?</Form.Label>
+                            <Form.Label>Discounts</Form.Label>
                             <Form.Control onChange={this.onDisc} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>How should the chatbot greet?</Form.Label>
+                            <Form.Label>Greet Message</Form.Label>
                             <Form.Control onChange={this.onGreet} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What is the event schedule?</Form.Label>
+                            <Form.Label>Event Schedule</Form.Label>
                             <Form.Control onChange={this.onSchedule} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What is the event date?</Form.Label>
+                            <Form.Label>Event date</Form.Label>
                             <Form.Control onChange={this.onEDate} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What is the event time?</Form.Label>
+                            <Form.Label>Event time</Form.Label>
                             <Form.Control onChange={this.onETime} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What is the available accommodation?</Form.Label>
+                            <Form.Label>Available Accommodation</Form.Label>
                             <Form.Control onChange={this.onAcco} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Who are the speakers?</Form.Label>
+                            <Form.Label>Guest speakers/ mentors</Form.Label>
                             <Form.Control onChange={this.onSpeak} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
@@ -264,7 +267,7 @@ export default class EventForm extends Component{
                             <Form.Control onChange={this.onSpeakE} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>What is the food arrangement?</Form.Label>
+                            <Form.Label>Food arrangemenets</Form.Label>
                             <Form.Control onChange={this.onFood} type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
@@ -272,7 +275,7 @@ export default class EventForm extends Component{
                             <Form.Control type="text" placeholder="Your Answer" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Contact information?</Form.Label>
+                            <Form.Label>Contact information</Form.Label>
                             <Form.Control onChange={this.onContact} type="text" placeholder="Your Answer" />
                         </Form.Group>
     
@@ -284,6 +287,8 @@ export default class EventForm extends Component{
                         <Button onClick={this.onSubmit} variant="primary">
                             Submit
                         </Button>
+                        <br/><br/>
+                        <p className='back-home' onClick={() => {window.location.href ='/'}}>Back to home</p>
                         </Form>
                     </div>
                 

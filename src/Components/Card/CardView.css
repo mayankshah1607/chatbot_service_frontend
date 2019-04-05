@@ -2,3 +2,10 @@
     margin: 12px
 }
 
+.apikey{
+    font-size: 12px;
+}
+
+#del {
+    cursor: pointer;
+}

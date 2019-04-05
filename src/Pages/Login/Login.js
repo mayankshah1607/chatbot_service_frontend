@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Login.css';
 import {Form, Button} from 'react-bootstrap';
 import Main from '../Main/Main';
+import cookie from 'react-cookies';
 
 export default class Login extends Component{
     constructor(){
@@ -50,6 +51,7 @@ export default class Login extends Component{
     onEmail = (event) => {
         this.setState({Email: event.target.value})
     }
+
 
     render(){
 

@@ -2,6 +2,11 @@
     padding: 24px;
 }
 
+.back-home{
+    color: #2196f3;
+    cursor: pointer;
+}
+
 #tick{
     width: 200px;
     height: auto;
@@ -31,8 +36,8 @@
 
 @media (min-width: 992px) { 
     #api-field{
-        margin-left: 186px;
-        margin-right: 186px;
+        margin-left: 126px;
+        margin-right: 126px;
     }
     #form-holder{
         margin-left: 252px;
