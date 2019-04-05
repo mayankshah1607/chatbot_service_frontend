@@ -1,0 +1,14 @@
+version: "3"
+services: 
+  web:
+    build: .
+    ports:
+    - "3000:3000"
+    volumes: 
+    - .:/usr/app
+  backend:
+    build: ./softwareproj_backend
+    ports:
+    - "5000:5000"
+    volumes: 
+    - ../evento_chatbotservice_api:/usr/app
