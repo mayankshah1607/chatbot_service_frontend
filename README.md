@@ -24,7 +24,7 @@ Run the following commands:
 ---
 
 ### (Full Stack)
-Clone the back-end repository from https://github.com/mayankshah1607/evento_chatbotservice_api and place it in the same directory as /evento_chatbotservice_web
+Clone the back-end repository from [here](https://github.com/mayankshah1607/evento_chatbotservice_api) and place it in the same directory as /evento_chatbotservice_web
 
 
 Run the following command: 
