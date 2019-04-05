@@ -20,3 +20,9 @@ Run the following commands:
 ```1. npm install```
 
 ```2. npm install run```
+
+
+### (Full Stack)
+Run the following commands: 
+
+```1. docker-compose up --build```
