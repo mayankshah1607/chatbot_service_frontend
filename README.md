@@ -2,7 +2,7 @@
 
 This is the code for Frontend WebApp for Evento Chatbot Service.
 
-## 1. Usage 
+## Usage 
 
 ### (Webapp only)
 #### Development mode (Docker)
