@@ -1,2 +1,3 @@
-# chatbot_service_frontend
-WebApp (Front-end, ReactJS) for Evento Chatbot Service API 
+# WebApp for Evento Chatbot service
+***
+This is the code for Frontend WebApp for Evento Chatbot Service.
