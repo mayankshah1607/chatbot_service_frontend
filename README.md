@@ -23,6 +23,6 @@ Run the following commands:
 
 
 ### (Full Stack)
-Run the following commands: 
+Run the following command: 
 
 ```1. docker-compose up --build```
